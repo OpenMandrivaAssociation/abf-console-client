@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   abf-console-client-1.6.tar.gz: 9e79f5c28662a171fae486449fcb4da6a69ce58a
+sources:
+  abf-console-client-1.6.tar.gz: 96fad038cfc74941b971bf7f053ac4677f4befa2
