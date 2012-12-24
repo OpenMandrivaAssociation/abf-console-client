@@ -1,5 +1,5 @@
 Name:           abf-console-client
-Version:        1.8
+Version:        1.9
 Release:        2
 Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
@@ -31,11 +31,12 @@ It contains a set of basic operations, done with either HTML
 parsing or through ABF json API. It also provides datamodel to
 operate with.
 
+
 %prep
 %setup -q -n %{name}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+make install DESTDIR=%{buildroot}
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
 
 %files
