@@ -1,5 +1,5 @@
 Name:           abf-console-client
-Version:        1.11
+Version:        1.11.1
 Release:        1
 Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
@@ -20,6 +20,7 @@ Suggests:       mock-urpm
 %description
 Console client for ABF (https://abf.rosalinux.ru). 
 
+
 %package -n     python-abf
 Summary:        Python API for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
@@ -31,13 +32,13 @@ It contains a set of basic operations, done with either HTML
 parsing or through ABF json API. It also provides datamodel to
 operate with.
 
-
 %prep
 %setup -q -n %{name}
 
 %install
 make install DESTDIR=%{buildroot}
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
+
 
 %files
 %dir %{py_puresitedir}/abf/console
