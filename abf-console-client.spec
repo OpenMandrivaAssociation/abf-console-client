@@ -1,6 +1,6 @@
 Name:           abf-console-client
-Version:        1.11.3
-Release:        1
+Version:        1.12.1
+Release:        5
 Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
 License:        GPLv2
