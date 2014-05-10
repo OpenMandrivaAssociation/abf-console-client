@@ -1,6 +1,6 @@
 Name:           abf-console-client
 Version:        1.14.6
-Release:        1
+Release:        2
 Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
 License:        GPLv2
@@ -16,6 +16,9 @@ Requires:       python-yaml
 Requires:       python-magic
 Requires:       tar >= 1.26
 Suggests:       mock-urpm
+Provides:       abf
+Provides:       abfcc
+Provides:       abf-c-c
 
 %description
 Console client for ABF (https://abf.rosalinux.ru). 
