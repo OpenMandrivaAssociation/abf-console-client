@@ -29,7 +29,7 @@ Console client for ABF (https://abf.rosalinux.ru).
 %package -n     python-abf
 Summary:        Python API for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
-Provides:       python-abf = %{version}-%{release}
+Requires:	python < 3.0
 
 %description -n python-abf
 %{name} is the python API to ABF (https://abf.rosalinux.ru).
