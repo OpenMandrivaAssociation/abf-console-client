@@ -1,4 +1,4 @@
-%define py2_puresitedir %(%{__python2} -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
+%define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:           abf-console-client
 Version:        1.14.8
