@@ -1,6 +1,8 @@
+%define py2_puresitedir %(%{__python2} -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
+
 Name:           abf-console-client
 Version:        1.14.8
-Release:        2
+Release:        3
 Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
 License:        GPLv2
@@ -39,13 +41,14 @@ operate with.
 %setup -q -n %{name}
 
 %install
-make install DESTDIR=%{buildroot}
+make install DESTDIR=%{buildroot} PYTHON=python2
+sed -i -e 's,#!%{_bindir}/python,#!%{_bindir}/python2,' %{buildroot}%{_bindir}/abf
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
 
 
 %files
-%dir %{py_puresitedir}/abf/console
-%{py_puresitedir}/abf/console/*.py*
+%dir %{py2_puresitedir}/abf/console
+%{py2_puresitedir}/abf/console/*.py*
 %{_bindir}/abf
 #bash_completion files
 %{_datadir}/bash-completion/abf 
@@ -60,7 +63,7 @@ ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completio
 %dir /var/lib/abf/mock-urpm
 
 %files -n python-abf
-%dir %{py_puresitedir}/abf
-%dir %{py_puresitedir}/abf/api
-%{py_puresitedir}/abf/*.py*
-%{py_puresitedir}/abf/api/*.py*
+%dir %{py2_puresitedir}/abf
+%dir %{py2_puresitedir}/abf/api
+%{py2_puresitedir}/abf/*.py*
+%{py2_puresitedir}/abf/api/*.py*
