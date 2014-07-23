@@ -1,8 +1,8 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:           abf-console-client
-Version:        1.14.9
-Release:        2
+Version:        1.15.1
+Release:        1
 Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
 License:        GPLv2
@@ -17,6 +17,7 @@ Requires:       git
 Requires:       python-yaml
 Requires:       python-magic
 Requires:       bsdtar
+Requires:       wget
 Suggests:       mock-urpm
 Provides:       abf
 Provides:       abfcc
