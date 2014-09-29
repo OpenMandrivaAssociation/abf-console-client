@@ -19,7 +19,8 @@ removed_sources:
   abf-console-client-1.14.9.tar.gz: 448188b892c5f53bf6189985a7e167ad0efe6679
   abf-console-client-1.14.tar.gz: e80fd7a3d85e3a75e88780d36c80f672df8ddf64
   abf-console-client-1.15.1.tar.gz: e128280b76a209193e6504913218a406c3143767
+  abf-console-client-1.15.2.tar.gz: 665e72e1150f37058fffa73b3f7514642dffe67b
   abf-console-client-1.15.tar.gz: cb02bd7baefa00340def9d992439ac12491411e9
   abf-console-client-1.9.tar.gz: a96c913906f6d36c30fa70f8c6ad259dbcfb0a98
 sources:
-  abf-console-client-1.15.2.tar.gz: 665e72e1150f37058fffa73b3f7514642dffe67b
+  abf-console-client-1.16.tar.gz: 2886b98dad0e018feff4ed4824ba901d673b3e53
