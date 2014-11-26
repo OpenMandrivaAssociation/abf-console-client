@@ -7,7 +7,7 @@ Summary:        Console client for ABF (https://abf.rosalinux.ru)
 Group:          System/Configuration/Packaging
 License:        GPLv2
 URL:            http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
-Source0:        https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
+Source0:        https://abf.rosalinux.ru/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
 BuildArch:      noarch
 
 Requires:       python-abf >= %{version}-%{release}
