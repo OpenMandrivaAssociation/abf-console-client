@@ -1,43 +1,43 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
-Name:           abf-console-client
-Version:        2.3
-Release:        1
-Summary:        Console client for ABF (https://abf.rosalinux.ru)
-Group:          System/Configuration/Packaging
-License:        GPLv2
-URL:            http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
-Source0:        https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
-BuildArch:      noarch
+Name:		abf-console-client
+Version:	2.4.1
+Release:	1
+Summary:	Console client for ABF (https://abf.io)
+Group:		System/Configuration/Packaging
+License:	GPLv2
+URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
+Source0:	https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
+BuildArch:	noarch
 
-Requires:       python-abf >= %{version}-%{release}
-Requires:       python-beaker
-Requires:       python-rpm
-Requires:       git
-Requires:       python-yaml
-Requires:       python-magic
+Requires:	python-abf >= %{version}-%{release}
+Requires:	python-beaker
+Requires:	python-rpm
+Requires:	git
+Requires:	python-yaml
+Requires:	python-magic
 %if %mdvver >= 201500
-Requires:       bsdtar
+Requires:	bsdtar
 %else
-Requires:		tar
+Requires:	tar
 %endif
-Requires:       wget
-Suggests:       mock-urpm
-Provides:       abf
-Provides:       abfcc
-Provides:       abf-c-c
+Requires:	wget
+Suggests:	mock-urpm
+Provides:	abf
+Provides:	abfcc
+Provides:	abf-c-c
 
 %description
-Console client for ABF (https://abf.rosalinux.ru).
+Console client for ABF (https://abf.io).
 
 
-%package -n     python-abf
-Summary:        Python API for ABF (https://abf.rosalinux.ru)
-Group:          System/Configuration/Packaging
+%package -n python-abf
+Summary:	Python API for ABF (https://abf.io)
+Group:		System/Configuration/Packaging
 Requires:	python < 3.0
 
 %description -n python-abf
-%{name} is the python API to ABF (https://abf.rosalinux.ru).
+%{name} is the python API to ABF (https://abf.io).
 It contains a set of basic operations, done with either HTML
 parsing or through ABF json API. It also provides datamodel to
 operate with.
