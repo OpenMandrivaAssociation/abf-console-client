@@ -37,7 +37,7 @@ Group:		System/Configuration/Packaging
 Requires:	python < 3.0
 
 %description -n python-abf
-%{name} is the python API to ABF (https://abf.rosalinux.ru).
+%{name} is the python API to ABF (https://abf.io).
 It contains a set of basic operations, done with either HTML
 parsing or through ABF json API. It also provides datamodel to
 operate with.
