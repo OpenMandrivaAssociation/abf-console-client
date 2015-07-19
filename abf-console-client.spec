@@ -2,7 +2,7 @@
 
 Name:		abf-console-client
 Version:	2.4.9
-Release:	1
+Release:	2
 Summary:	Console client for ABF (https://abf.io)
 Group:		System/Configuration/Packaging
 License:	GPLv2
