@@ -8,6 +8,9 @@ Group:		System/Configuration/Packaging
 License:	GPLv2
 URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
 Source0:	https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
+Source1:	cooker-aarch64-main.cfg
+Source2:	cooker-armv7hl-main.cfg
+Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
 
 Requires:	python-abf >= %{version}-%{release}
@@ -54,6 +57,7 @@ popd
 make install DESTDIR=%{buildroot} PYTHON=python2
 
 sed -i -e 's,#!%{_bindir}/python,#!%{_bindir}/python2,' %{buildroot}%{_bindir}/abf
+install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock-urpm/configs/
 
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
 pushd po
