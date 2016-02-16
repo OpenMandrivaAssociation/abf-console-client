@@ -12,6 +12,7 @@ Source1:	cooker-aarch64-main.cfg
 Source2:	cooker-armv7hl-main.cfg
 Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
+Patch0:		abf.oma.patch
 
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python2-beaker
@@ -47,6 +48,7 @@ operate with.
 
 %prep
 %setup -qn %{name}-v%{version}
+%apply_patches
 
 %build
 pushd po
