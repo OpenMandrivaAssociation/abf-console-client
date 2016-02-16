@@ -1,8 +1,8 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:		abf-console-client
-Version:	2.4.9
-Release:	3
+Version:	2.5.3
+Release:	1
 Summary:	Console client for ABF (https://abf.io)
 Group:		System/Configuration/Packaging
 License:	GPLv2
