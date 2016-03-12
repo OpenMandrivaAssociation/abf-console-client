@@ -14,6 +14,7 @@ Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
 Patch0:		abf.oma.patch
 Patch1:		abf_defaults.patch
+Patch2:		abf_git.patch
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python-beaker
 Requires:	python-rpm
