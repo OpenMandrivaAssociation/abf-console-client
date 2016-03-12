@@ -1,15 +1,19 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:		abf-console-client
-Version:	2.4.6
+Version:	2.5.3
 Release:	0.1
-Summary:	Console client for ABF (https://abf.io)
+Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
 URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
 Source0:	https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
+Source1:	cooker-aarch64-main.cfg
+Source2:	cooker-armv7hl-main.cfg
+Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
-
+Patch0:		abf.oma.patch
+Patch1:		abf_defaults.patch
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python-beaker
 Requires:	python-rpm
@@ -28,22 +32,23 @@ Provides:	abfcc
 Provides:	abf-c-c
 
 %description
-Console client for ABF (https://abf.io).
+Console client for ABF (https://abf.openmandriva.org).
 
 
 %package -n python-abf
-Summary:	Python API for ABF (https://abf.io)
+Summary:	Python API for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 Requires:	python < 3.0
 
 %description -n python-abf
-%{name} is the python API to ABF (https://abf.io).
+%{name} is the python API to ABF (https://abf.openmandriva.org).
 It contains a set of basic operations, done with either HTML
 parsing or through ABF json API. It also provides datamodel to
 operate with.
 
 %prep
 %setup -qn %{name}-v%{version}
+%apply_patches
 
 %build
 pushd po
@@ -54,6 +59,7 @@ popd
 make install DESTDIR=%{buildroot} PYTHON=python2
 
 sed -i -e 's,#!%{_bindir}/python,#!%{_bindir}/python2,' %{buildroot}%{_bindir}/abf
+install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock-urpm/configs/
 
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
 pushd po
