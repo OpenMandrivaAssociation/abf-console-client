@@ -1,0 +1,12 @@
+--- abf-console-client-v2.5.3/abf.py.orig    2016-01-23 18:54:20.000000000 +0000
++++ abf-console-client-v2.5.3/abf.py    2016-03-12 16:37:42.326965062 +0000
+@@ -761,7 +761,7 @@
+     elif len(tmp) == 2:
+         project_name = tmp[1]
+ 
+-    uri = "%s/%s.git" % (cfg['user']['git_uri'], proj)
++    uri = "%s/%s.git" % (cfg['user']['git_uri'], project_name)
+     cmd = ['git', 'clone', uri]
+     if command_line.branch:
+         cmd += ['-b', command_line.branch]
+
