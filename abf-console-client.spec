@@ -2,8 +2,8 @@
 
 Name:		abf-console-client
 Version:	2.5.3
-Release:	1
-Summary:	Console client for ABF (https://abf.io)
+Release:	2
+Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
 URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
@@ -13,7 +13,7 @@ Source2:	cooker-armv7hl-main.cfg
 Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
 Patch0:		abf.oma.patch
-
+Patch1:		abf_defaults.patch
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python2-beaker
 Requires:	python-rpm
@@ -32,16 +32,16 @@ Provides:	abfcc
 Provides:	abf-c-c
 
 %description
-Console client for ABF (https://abf.io).
+Console client for ABF (https://abf.openmandriva.org).
 
 
 %package -n python-abf
-Summary:	Python API for ABF (https://abf.io)
+Summary:	Python API for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 Requires:	python < 3.0
 
 %description -n python-abf
-%{name} is the python API to ABF (https://abf.io).
+%{name} is the python API to ABF (https://abf.openmandriva.org).
 It contains a set of basic operations, done with either HTML
 parsing or through ABF json API. It also provides datamodel to
 operate with.
