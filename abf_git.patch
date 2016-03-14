@@ -10,3 +10,27 @@
      if command_line.branch:
          cmd += ['-b', command_line.branch]
 
+@@ -1252,7 +1252,7 @@
+     # get git commit hash
+
+     commit_hash = None
+-    if tmp == 0:
++    if tmp == 0 and (not as_branch or not as_saveto):
+         log.error(_("Git branch, tag or commit can not be resolved automatically. Specify it by -b, -t or -c."))
+         exit(1)
+     if tmp == 1:
+--- abf-console-client-v2.5.3/abf/console/misc.py.orig	2016-03-14 10:16:33.194594756 +0000
++++ abf-console-client-v2.5.3/abf/console/misc.py	2016-03-14 10:32:58.793423994 +0000
+@@ -46,9 +46,10 @@
+         output, ret_code = execute_command(['git', 'remote', 'show', 'origin', '-n'], cwd=path, env=e)
+ 
+         for line in output.split('\n'):
+-            if line.startswith('  Fetch URL:') and 'abf' in line:
++            if line.startswith('  Fetch URL:') and 'OpenMandrivaAssociation' in line:
+                 project_name = line.split('/')[-1][:-4]
+-                owner_name = line.split('/')[-2]
++                # Cant tell abf owner from github loc
++                owner_name = 'openmandriva'
+                 return (owner_name, project_name)
+         return (None, None)
+     except ReturnCodeNotZero:
