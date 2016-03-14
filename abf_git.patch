@@ -9,7 +9,6 @@
      cmd = ['git', 'clone', uri]
      if command_line.branch:
          cmd += ['-b', command_line.branch]
-
 @@ -1252,7 +1252,7 @@
      # get git commit hash
 
