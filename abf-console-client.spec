@@ -2,7 +2,7 @@
 
 Name:		abf-console-client
 Version:	2.5.3
-Release:	0.2
+Release:	0.3
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -15,6 +15,7 @@ BuildArch:	noarch
 Patch0:		abf.oma.patch
 Patch1:		abf_defaults.patch
 Patch2:		abf_git.patch
+Patch3:		missing_fields.patch
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python-beaker
 Requires:	python-rpm
