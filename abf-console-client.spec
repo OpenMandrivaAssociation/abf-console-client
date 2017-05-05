@@ -1,8 +1,8 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:		abf-console-client
-Version:	2.5.3
-Release:	4
+Version:	2.6.3
+Release:	1
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -29,9 +29,9 @@ Requires:	tar
 %endif
 Requires:	wget
 Suggests:	mock-urpm
-Provides:	abf
-Provides:	abfcc
-Provides:	abf-c-c
+Provides:	abf = %{EVRD}
+Provides:	abfcc = %{EVRD}
+Provides:	abf-c-c = %{EVRD}
 
 %description
 Console client for ABF (https://abf.openmandriva.org).
