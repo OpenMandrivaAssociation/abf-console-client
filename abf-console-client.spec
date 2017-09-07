@@ -1,8 +1,8 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:		abf-console-client
-Version:	2.6.3
-Release:	1
+Version:	2.7
+Release:	2
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
