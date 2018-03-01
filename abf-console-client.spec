@@ -2,7 +2,7 @@
 
 Name:		abf-console-client
 Version:	2.7
-Release:	2
+Release:	3
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -11,11 +11,13 @@ Source0:	https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.
 Source1:	cooker-aarch64-main.cfg
 Source2:	cooker-armv7hl-main.cfg
 Source3:	cooker-x86_64-main.cfg
-BuildArch:	noarch
 Patch0:		abf.oma.patch
 Patch1:		abf_defaults.patch
 Patch2:		abf_git.patch
 Patch3:		missing_fields.patch
+Patch4:		abf-console-client-v2.7-use-cached-chroot-by-default-fix-extra-tests.patch
+Patch5:		abf-console-client-v2.7-i686-for-cooker-and-4.0.patch
+BuildArch:	noarch
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python2-beaker
 Requires:	python-rpm
@@ -36,7 +38,6 @@ Provides:	abf-c-c = %{EVRD}
 %description
 Console client for ABF (https://abf.openmandriva.org).
 
-
 %package -n python-abf
 Summary:	Python API for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
@@ -53,9 +54,9 @@ operate with.
 %apply_patches
 
 %build
-pushd po
+cd po
 %make
-popd
+cd ..
 
 %install
 make install DESTDIR=%{buildroot} PYTHON=python2
@@ -64,9 +65,9 @@ sed -i -e 's,#!%{_bindir}/python,#!%{_bindir}/python2,' %{buildroot}%{_bindir}/a
 install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock-urpm/configs/
 
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
-pushd po
+cd po
 %makeinstall_std
-popd
+cd ..
 
 %find_lang %{name}
 
