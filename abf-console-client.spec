@@ -1,15 +1,15 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 
 Name:		abf-console-client
-Version:	2.7
-Release:	3
+Version:	2.7.1
+Release:	1
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
 URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
 Source0:	https://abf.io/soft/abf-console-client/archive/%{name}-v%{version}.tar.gz
 Source1:	cooker-aarch64-main.cfg
-Source2:	cooker-armv7hl-main.cfg
+Source2:	cooker-armv7hnl-main.cfg
 Source3:	cooker-x86_64-main.cfg
 Patch0:		abf.oma.patch
 Patch1:		abf_defaults.patch
