@@ -20,6 +20,7 @@ Patch3:		missing_fields.patch
 Patch4:		abf-console-client-v2.7-use-cached-chroot-by-default-fix-extra-tests.patch
 Patch5:		abf-console-client-v2.7-i686-for-cooker-and-4.0.patch
 BuildArch:	noarch
+BuildRequires:	pkgconfig(python2)
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python2-beaker
 Requires:	python-rpm
