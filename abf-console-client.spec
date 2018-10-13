@@ -1,5 +1,6 @@
 %define py2_puresitedir %(python2 -c 'import distutils.sysconfig; print(distutils.sysconfig.get_python_lib())')
 %define py_byte_compile %nil
+%define _python_bytecompile_build %nil
 
 Name:		abf-console-client
 Version:	2.7.1
