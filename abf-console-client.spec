@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.1
-Release:	1
+Release:	2
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -10,7 +10,7 @@ Source1:	cooker-aarch64-main.cfg
 Source2:	cooker-armv7hnl-main.cfg
 Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
-BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(python)
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python-beaker
 Requires:	python-rpm
