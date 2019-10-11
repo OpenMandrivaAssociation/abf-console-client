@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.2.2
-Release:	3
+Release:	4
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -23,7 +23,7 @@ Requires:	bsdtar
 Requires:	tar
 %endif
 Requires:	wget
-Suggests:	mock
+Requires:	mock
 Provides:	abf = %{EVRD}
 Provides:	abfcc = %{EVRD}
 Provides:	abf-c-c = %{EVRD}
