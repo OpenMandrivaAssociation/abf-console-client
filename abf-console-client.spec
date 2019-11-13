@@ -57,6 +57,7 @@ install -d %{buildroot}%{_sysconfdir}/abf/mock/configs
 install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock/configs/
 
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
+ln -s %{py_puresitedir}/abf/console/download.py %{buildroot}/%{_bindir}/dw
 cd po
 %makeinstall_std
 cd ..
@@ -68,6 +69,7 @@ cd ..
 %{py_puresitedir}/abf/console/*.py*
 %{py_puresitedir}/abf/console/__pycache__/
 %{_bindir}/abf
+%{_bindir}/dw
 #bash_completion files
 %{_datadir}/bash-completion/abf 
 %{_sysconfdir}/bash_completion.d/abf
