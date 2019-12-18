@@ -43,23 +43,22 @@ parsing or through ABF json API. It also provides datamodel to
 operate with.
 
 %prep
-%setup -qn %{name}-%{version}
-%apply_patches
+%autosetup -n %{name}-%{version} -p1
 
 %build
 cd po
-%make
+%make_build
 cd ..
 
 %install
-make install DESTDIR=%{buildroot} PYTHON=python
+%make_install DESTDIR=%{buildroot} PYTHON=python
 install -d %{buildroot}%{_sysconfdir}/abf/mock/configs
 install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock/configs/
 
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
 ln -s %{py_puresitedir}/abf/console/download.py %{buildroot}/%{_bindir}/dw
 cd po
-%makeinstall_std
+%make_install
 cd ..
 
 %find_lang %{name}
