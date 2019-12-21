@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.2.6
-Release:	2
+Release:	3
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -12,11 +12,11 @@ Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python)
 Requires:	python-abf >= %{version}-%{release}
-Requires:	python-beaker
-Requires:	python-rpm
+Requires:	python3egg(beaker)
+Requires:	python3egg(rpm)
 Requires:	git
-Requires:	python-yaml
-Requires:	python-magic
+Requires:	python3egg(pyyaml)
+Requires:	python3egg(file-magic)
 %if %mdvver >= 201500
 Requires:	bsdtar
 %else
