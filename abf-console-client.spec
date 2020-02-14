@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.2.8
-Release:	1
+Release:	2
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -51,7 +51,11 @@ cd po
 cd ..
 
 %install
-%make_install DESTDIR=%{buildroot} PYTHON=python
+%make_install \
+	default_filestore_url="https://file-store.openmandriva.org" \
+	PYTHON=python \
+	default_url=https://abf.openmandriva.org
+
 install -d %{buildroot}%{_sysconfdir}/abf/mock/configs
 install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock/configs/
 
