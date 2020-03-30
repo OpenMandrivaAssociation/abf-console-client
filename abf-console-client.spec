@@ -10,18 +10,14 @@ Source1:	cooker-aarch64-main.cfg
 Source2:	cooker-armv7hnl-main.cfg
 Source3:	cooker-x86_64-main.cfg
 BuildArch:	noarch
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python3dist(beaker)
 Requires:	python3dist(rpm)
 Requires:	git
 Requires:	python3dist(pyyaml)
 Requires:	python3dist(file-magic)
-%if %mdvver >= 201500
 Requires:	bsdtar
-%else
-Requires:	tar
-%endif
 Requires:	wget
 Requires:	mock
 Provides:	abf = %{EVRD}
@@ -53,7 +49,7 @@ cd ..
 %install
 %make_install \
 	default_filestore_url="https://file-store.openmandriva.org" \
-	PYTHON=python \
+	PYTHON=%{__python3} \
 	default_url=https://abf.openmandriva.org
 
 install -d %{buildroot}%{_sysconfdir}/abf/mock/configs
@@ -68,9 +64,9 @@ cd ..
 %find_lang %{name}
 
 %files -f %{name}.lang
-%dir %{py_puresitedir}/abf/console
-%{py_puresitedir}/abf/console/*.py*
-%{py_puresitedir}/abf/console/__pycache__/
+%dir %{py3_puresitedir}/abf/console
+%{py3_puresitedir}/abf/console/*.py*
+%{py3_puresitedir}/abf/console/__pycache__/
 %{_bindir}/abf
 %{_bindir}/dw
 #bash_completion files
@@ -86,9 +82,9 @@ cd ..
 %dir /var/lib/abf/mock
 
 %files -n python-abf
-%dir %{py_puresitedir}/abf
-%dir %{py_puresitedir}/abf/api
-%{py_puresitedir}/abf/*.py*
-%{py_puresitedir}/abf/__pycache__/
-%{py_puresitedir}/abf/api/*.py*
-%{py_puresitedir}/abf/api/__pycache__/
+%dir %{py3_puresitedir}/abf
+%dir %{py3_puresitedir}/abf/api
+%{py3_puresitedir}/abf/*.py*
+%{py3_puresitedir}/abf/__pycache__/
+%{py3_puresitedir}/abf/api/*.py*
+%{py3_puresitedir}/abf/api/__pycache__/
