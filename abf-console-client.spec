@@ -1,6 +1,6 @@
 Name:		abf-console-client
-Version:	3.0.3.1
-Release:	2
+Version:	3.0.3.2
+Release:	1
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -70,7 +70,7 @@ cd ..
 %{_bindir}/abf
 %{_bindir}/dw
 #bash_completion files
-%{_datadir}/bash-completion/abf 
+%{_datadir}/bash-completion/abf
 %{_sysconfdir}/bash_completion.d/abf
 %{_sysconfdir}/profile.d/abfcd.sh
 %dir %{_sysconfdir}/abf/mock/configs/
