@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.3.6
-Release:	1
+Release:	2
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -9,6 +9,7 @@ Source0:	https://github.com/OpenMandrivaSoftware/abf-console-client/archive/v%{v
 Source1:	cooker-aarch64-main.cfg
 Source2:	cooker-armv7hnl-main.cfg
 Source3:	cooker-x86_64-main.cfg
+Patch0:		abfcc-python-3.11.patch
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python3)
 Requires:	python-abf >= %{version}-%{release}
@@ -66,7 +67,6 @@ cd ..
 %files -f %{name}.lang
 %dir %{py3_puresitedir}/abf/console
 %{py3_puresitedir}/abf/console/*.py*
-%{py3_puresitedir}/abf/console/__pycache__/
 %{_bindir}/abf
 %{_bindir}/dw
 #bash_completion files
@@ -85,6 +85,4 @@ cd ..
 %dir %{py3_puresitedir}/abf
 %dir %{py3_puresitedir}/abf/api
 %{py3_puresitedir}/abf/*.py*
-%{py3_puresitedir}/abf/__pycache__/
 %{py3_puresitedir}/abf/api/*.py*
-%{py3_puresitedir}/abf/api/__pycache__/

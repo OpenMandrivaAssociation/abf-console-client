@@ -1,0 +1,12 @@
+diff -up abf-console-client-3.0.3.6/Makefile.1~ abf-console-client-3.0.3.6/Makefile
+--- abf-console-client-3.0.3.6/Makefile.1~	2021-11-29 13:19:05.000000000 +0100
++++ abf-console-client-3.0.3.6/Makefile	2022-02-24 01:06:36.264596880 +0100
+@@ -7,7 +7,7 @@
+ 
+ PYTHON=python3
+ PYTHON_BIN := $(shell which $(PYTHON))
+-PYVER := $(shell $(PYTHON) -c 'import sys; print("%.3s" %(sys.version))')
++PYVER := $(shell $(PYTHON) -c 'import sys; print(str(sys.version_info.major) + "." + str(sys.version_info.minor))')
+ PYSYSDIR := $(shell $(PYTHON) -c 'import sys; print(sys.prefix)')
+ PYLIBDIR = $(PYSYSDIR)/lib/python$(PYVER)
+ PKGDIR = $(PYLIBDIR)/site-packages
