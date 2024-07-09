@@ -1,17 +1,17 @@
 Name:		abf-console-client
 Version:	3.0.3.12
-Release:	1
+Release:	2
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
 URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
 Source0:	https://github.com/OpenMandrivaSoftware/abf-console-client/archive/v%{version}.tar.gz
-Source1:	cooker-aarch64-main.cfg
-Source2:	cooker-armv7hnl-main.cfg
-Source3:	cooker-x86_64-main.cfg
+Source1:	cooker-all.cfg
+Source2:	cooker-main.cfg
 Patch0:		abfcc-python-3.11.patch
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python3)
+BuildRequires:	gettext
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python3dist(beaker)
 Requires:	python3dist(rpm)
@@ -53,8 +53,25 @@ cd ..
 	PYTHON=%{__python3} \
 	default_url=https://abf.openmandriva.org
 
+# Mock configs...
 install -d %{buildroot}%{_sysconfdir}/abf/mock/configs
-install -m 0644 %{SOURCE1} %{SOURCE2} %{SOURCE3} %{buildroot}%{_sysconfdir}/abf/mock/configs/
+SLOWARCHES="riscv64 loongarch64 i686 armv7hnl"
+for arch in aarch64 x86_64 znver1 riscv64 loongarch64 i686 armv7hnl; do
+	sed -e "s,@ARCH@,${arch},g" %{S:1} >%{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-all.cfg
+	sed -e "s,@ARCH@,${arch},g" %{S:2} >%{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-main.cfg
+	if echo ${SLOWARCHES} |grep -q $arch; then
+		# Allow crosscompiling from faster machines
+		sed -i -e "s|^config_opts\['legal_host_arches'\] =.*|config_opts['legal_host_arches'] = ('${arch}', 'aarch64', 'x86_64', 'znver1')|" %{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-{all,main}.cfg
+	elif [ "${arch}" = "x86_64" ]; then
+		# Since znver1 is a superset of x86_64, this is always ok
+		sed -i -e "s|^config_opts\['legal_host_arches'\] =.*|config_opts['legal_host_arches'] = ('x86_64', 'znver1')|" %{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-{all,main}.cfg
+	fi
+	sed -e "s,cooker,rolling,g" %{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-all.cfg >%{buildroot}%{_sysconfdir}/abf/mock/configs/rolling-${arch}-all.cfg
+	sed -e "s,cooker,rolling,g" %{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-main.cfg >%{buildroot}%{_sysconfdir}/abf/mock/configs/rolling-${arch}-main.cfg
+	sed -e "s,cooker,rock,g" %{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-all.cfg >%{buildroot}%{_sysconfdir}/abf/mock/configs/rock-${arch}-all.cfg
+	sed -e "s,cooker,rock,g" %{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-main.cfg >%{buildroot}%{_sysconfdir}/abf/mock/configs/rock-${arch}-main.cfg
+done
+
 
 ln -s %{_datadir}/bash-completion/abf %{buildroot}/%{_sysconfdir}/bash_completion.d/abf
 ln -s %{py_puresitedir}/abf/console/download.py %{buildroot}/%{_bindir}/dw
