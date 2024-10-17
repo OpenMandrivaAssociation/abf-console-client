@@ -4,7 +4,7 @@ Release:	1
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
-URL:		http://wiki.rosalab.ru/en/index.php/ABF_Console_Client
+URL:		https://wiki.rosalab.ru/en/index.php/ABF_Console_Client
 Source0:	https://github.com/OpenMandrivaSoftware/abf-console-client/archive/v%{version}.tar.gz
 Source1:	cooker-all.cfg
 Source2:	cooker-main.cfg
