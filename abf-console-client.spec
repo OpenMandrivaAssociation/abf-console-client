@@ -12,6 +12,7 @@ Patch0:		abfcc-python-3.11.patch
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	gettext
+BuildRequires:	make
 Requires:	python-abf >= %{version}-%{release}
 Requires:	python3dist(beaker)
 Requires:	python3dist(rpm)
