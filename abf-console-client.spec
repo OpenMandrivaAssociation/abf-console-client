@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.3.15
-Release:	2
+Release:	3
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -10,15 +10,15 @@ Source1:	cooker-all.cfg
 Source2:	cooker-main.cfg
 Patch0:		abfcc-python-3.11.patch
 BuildArch:	noarch
-BuildRequires:	pkgconfig(python3)
 BuildRequires:	gettext
 BuildRequires:	make
+BuildRequires:	python
 Requires:	python-abf >= %{version}-%{release}
-Requires:	python3dist(beaker)
-Requires:	python3dist(rpm)
+Requires:	python%{pyver}dist(beaker)
+Requires:	python%{pyver}dist(rpm)
 Requires:	git
-Requires:	python3dist(pyyaml)
-Requires:	python3dist(file-magic)
+Requires:	python%{pyver}dist(pyyaml)
+Requires:	python%{pyver}dist(file-magic)
 Requires:	bsdtar
 Requires:	wget
 Requires:	mock
@@ -51,13 +51,13 @@ cd ..
 %install
 %make_install \
 	default_filestore_url="https://file-store.openmandriva.org" \
-	PYTHON=%{__python3} \
+	PYTHON=python \
 	default_url=https://abf.openmandriva.org
 
 # Mock configs...
 install -d %{buildroot}%{_sysconfdir}/abf/mock/configs
 SLOWARCHES="riscv64 loongarch64 i686 armv7hnl"
-for arch in aarch64 x86_64 znver1 riscv64 loongarch64 i686 armv7hnl; do
+for arch in %{aarch64} %{x86_64} %{riscv64} loongarch64 i686 armv7hnl; do
 	sed -e "s,@ARCH@,${arch},g" %{S:1} >%{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-all.cfg
 	sed -e "s,@ARCH@,${arch},g" %{S:2} >%{buildroot}%{_sysconfdir}/abf/mock/configs/cooker-${arch}-main.cfg
 	if echo ${SLOWARCHES} |grep -q $arch; then
@@ -83,8 +83,8 @@ cd ..
 %find_lang %{name}
 
 %files -f %{name}.lang
-%dir %{py3_puresitedir}/abf/console
-%{py3_puresitedir}/abf/console/*.py*
+%dir %{py_puresitedir}/abf/console
+%{py_puresitedir}/abf/console/*.py*
 %{_bindir}/abf
 %{_bindir}/dw
 #bash_completion files
@@ -100,7 +100,7 @@ cd ..
 %dir /var/lib/abf/mock
 
 %files -n python-abf
-%dir %{py3_puresitedir}/abf
-%dir %{py3_puresitedir}/abf/api
-%{py3_puresitedir}/abf/*.py*
-%{py3_puresitedir}/abf/api/*.py*
+%dir %{py_puresitedir}/abf
+%dir %{py_puresitedir}/abf/api
+%{py_puresitedir}/abf/*.py*
+%{py_puresitedir}/abf/api/*.py*
