@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.3.15
-Release:	3
+Release:	4
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
