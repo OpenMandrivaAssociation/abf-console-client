@@ -1,0 +1,30 @@
+diff -up abf-console-client-3.0.3.15/abf/console/misc.py.omv~ abf-console-client-3.0.3.15/abf/console/misc.py
+--- abf-console-client-3.0.3.15/abf/console/misc.py.omv~	2025-12-17 17:23:49.122528853 +0100
++++ abf-console-client-3.0.3.15/abf/console/misc.py	2025-12-17 17:24:49.647905110 +0100
+@@ -46,7 +46,7 @@ def get_project_name(path=None):
+         e["LC_ALL"] = "C"
+         output, ret_code = execute_command(['git', 'remote', 'show', 'origin', '-n'], cwd=path, env=e)
+ 
+-        m = re.compile("^.*Fetch URL:\s+.*[:/]([^/:]+)/([^/]+)\.git$",re.MULTILINE).search(output)
++        m = re.compile(r"^.*Fetch URL:\s+.*[:/]([^/:]+)/([^/]+)\.git$",re.MULTILINE).search(output)
+         if m:
+             owner_name, project_name = m.groups()
+             # Cant tell abf owner from github loc, so let's hardocde it
+@@ -142,7 +142,7 @@ def get_current_commit_hash(path=None):
+ def get_remote_branch_hash(branch, cwd=None):
+     ''' Get the hash of the remote branch top commit.
+     If not in git repository directory - exception will be reised. If hash can not be found - return None'''
+-    re_ref = re.compile('^([0-9a-f]+) refs/remotes/\w+/%s$' % branch)
++    re_ref = re.compile(r'^([0-9a-f]+) refs/remotes/\w+/%s$' % branch)
+ 
+     output, ret_code = execute_command(['git', 'show-ref'], cwd=cwd)
+     for line in output.split('\n'):
+@@ -578,7 +578,7 @@ def upload_files(models, min_size, path=
+         if src not in yaml_files or sha_hash != yaml_files[src]:
+             log.debug(_('Hash for file %s has been updated') % src)
+             # try to remove previous versions
+-            re_src = re.compile('^([\w\d\-\.]+)-([\d\.]+)\.(tar\.gz|tar.xz|gem|run|tgz|zip|tar\.bz2|crate)$')
++            re_src = re.compile(r'^([\w\d\-\.]+)-([\d\.]+)\.(tar\.gz|tar.xz|gem|run|tgz|zip|tar\.bz2|crate)$')
+             res = re_src.match(src)
+             if res:
+                 src_gr = res.groups()
