@@ -1,6 +1,6 @@
 Name:		abf-console-client
 Version:	3.0.3.15
-Release:	5
+Release:	6
 Summary:	Console client for ABF (https://abf.openmandriva.org)
 Group:		System/Configuration/Packaging
 License:	GPLv2
@@ -10,6 +10,7 @@ Source1:	cooker-all.cfg
 Source2:	cooker-main.cfg
 Patch0:		abfcc-python-3.11.patch
 Patch1:		abfcc-python-3.14.patch
+Patch2:		abfcc-expose-cancel.patch
 BuildArch:	noarch
 BuildRequires:	gettext
 BuildRequires:	make

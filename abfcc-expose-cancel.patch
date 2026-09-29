@@ -1,0 +1,79 @@
+--- a/abf.py
++++ b/abf.py
+@@ -292,6 +292,11 @@
+     subparser.add_argument('task_ids', action='store', nargs="+", help=_('The IDs of tasks to publish.'))
+     subparser.set_defaults(func=publish)
+ 
++    # cancel
++    subparser = subparsers.add_parser('cancel', help=_('Cancel a task that is still building.'))
++    subparser.add_argument('task_ids', action='store', nargs="+", help=_('The IDs of tasks to cancel.'))
++    subparser.set_defaults(func=cancel)
++
+     # copy
+     subparser = subparsers.add_parser('copy', help=_('Copy all the files from SRC_BRANCH to DST_BRANCH'))
+     subparser.add_argument('src_branch', action='store', help=_('source branch'))
+@@ -1507,6 +1512,19 @@
+             log.error(_('Could not publish task %(id)s: %(exception)s') % {'id': task_id, 'exception': str(ex)})
+ 
+ 
++def cancel():
++    log.debug('CANCEL started')
++    for task_id in command_line.task_ids:
++        try:
++            bl = BuildList(models, task_id)
++            if not bl.is_cancellable():
++                log.error(_("The status of build task %(id)s is \"%(status)s\", can not be canceled!") % {'id': bl.id, 'status': bl.status_string})
++                continue
++            res = bl.cancel()
++        except AbfApiException as ex:
++            log.error(_('Could not cancel task %(id)s: %(exception)s') % {'id': task_id, 'exception': str(ex)})
++
++
+ def _print_build_status(models, ID):
+     try:
+         bl = BuildList(models, ID)
+--- a/abf/model.py
++++ b/abf/model.py
+@@ -664,6 +664,28 @@
+                 'notify the console-client developers. Send them a set of command-line arguments and the request data:\n%s') % DATA )
+             exit(1)
+ 
++    # A task can be canceled as long as it is still in flight. final_statuses are
++    # the states from which nothing more can happen, so cancelling those is refused.
++    # 10000 (build is canceling) is excluded separately so that a task which is
++    # already on its way out is not canceled twice.
++    def is_cancellable(self):
++        return self.status not in self.final_statuses and self.status != 10000
++
++    def cancel(self):
++        try:
++            log.info(_("Canceling the task %s...") % self.id)
++            result = self.models.jsn.cancel(self.id)
++            if result['build_list']['message'] == 'Build canceled':
++                log.info(result['build_list']['message'])
++            else:
++                log.error(result['build_list']['message'])
++
++            return result
++        except BadRequestError as ex:
++            log.error(_('Sorry, but something went wrong and request I\'ve sent to ABF is bad. Please, '
++                'notify the console-client developers. Send them a set of command-line arguments and the request data:\n%s') % DATA )
++            exit(1)
++
+ 
+ class PullRequest(Model):
+     required_fields = ['title', 'body', 'to_ref', 'from_ref']
+--- a/abf/api/jsn.py
++++ b/abf/api/jsn.py
+@@ -376,6 +376,11 @@
+         URL = "/api/v1/build_lists/%d/publish.json" % task_id
+         return self.get_url_contents(URL, GET=None, PUT={'nothing': 1})
+ 
++    def cancel(self, task_id):
++        task_id = int(task_id)
++        URL = "/api/v1/build_lists/%d/cancel.json" % task_id
++        return self.get_url_contents(URL, GET=None, PUT={'nothing': 1})
++
+     def new_pull_request(self, data, p_id):
+         URL = "/api/v1/projects/%d/pull_requests.json" % p_id
+         return self.get_url_contents(URL, GET=None, POST=data)
